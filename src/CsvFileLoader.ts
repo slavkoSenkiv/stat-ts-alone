@@ -1,6 +1,7 @@
 import fs from 'fs';
+import { DataLoader } from './MatchReader';
 
-export class CsvFileLoader {
+export class CsvFileLoader implements DataLoader {
   constructor (public filename: string) {}
   data: string[][] = [];
   load(): void {
