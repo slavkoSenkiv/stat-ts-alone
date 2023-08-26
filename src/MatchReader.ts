@@ -18,10 +18,10 @@ export class MatchReader implements Reader{
   constructor(public loader: DataLoader) {}
   matches: MatchData[] = [];
 
-  formatData(): void{
+  formatData(): void {
     this.loader.load();
     this.matches = this.loader.data.map(
-      (row: string[]) => {
+      (row: string[]): MatchData => {
         return [
           stringToDate(row[0]),
           row[1],
@@ -30,7 +30,8 @@ export class MatchReader implements Reader{
           parseInt(row[4]),
           row[5] as MatchResult,
           row[6]
-        ]
-    })
+        ];
+      }
+    )
   }
 }

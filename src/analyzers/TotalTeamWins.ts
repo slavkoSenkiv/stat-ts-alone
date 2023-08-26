@@ -1,20 +1,20 @@
-import { Reader } from "../MatchReader";
 import { MatchResult } from "../MatchResult";
 import { Analyzer } from "../Summary";
+import { MatchData } from "../MatchData";
 
 export class TotalTeamWins implements Analyzer{
-  constructor(public team: string, public reader: Reader) {}
+  constructor(public team: string) {}
 
-  run(): number {
-    let teamScores: number = 0;
-    for (let match of this.reader.matches){
+  run(matches: MatchData[]): string {
+    let totalTeamWins: number = 0;
+    for (let match of matches){
       if (match[1] === this.team && match[5] === MatchResult.HomeWin){
-        teamScores += match[3];
+        totalTeamWins ++;
       } else if (match[2] === this.team && match[5] === MatchResult.AwayWin) {
-        teamScores += match[4];
+        totalTeamWins ++;
       }
     }
-    return teamScores;
+    return `Team ${this.team} won ${totalTeamWins} games`;
   }
 
 }

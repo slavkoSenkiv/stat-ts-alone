@@ -1,24 +1,22 @@
-import { MatchReader, Reader } from "./MatchReader";
+import { MatchData } from "./MatchData";
 
 export interface Analyzer {
   team: string;
-  reader: Reader;
-  run(): number;
+  run(matches: MatchData[]): string;
 }
 
 export interface ReportFormat {
-  reportData: string | number;
-  run(): void;
+  run(reportData: string): void;
 }
 
 export class Summary {
   constructor(
     public analyzer: Analyzer, 
-    public reportFormat: ReportFormat) {}
+    public reportFormat: ReportFormat
+  ) {}
 
-
-  runAndBuildReport(){
-    this.analyzer.run();
-    this.reportFormat.run();
+  runAndBuildReport(matches: MatchData[]): void {
+    let output = this.analyzer.run(matches);
+    this.reportFormat.run(output);
   }
 }
