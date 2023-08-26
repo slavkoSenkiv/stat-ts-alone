@@ -8,13 +8,19 @@ export interface DataLoader {
   load(): void;
 }
 
-export class MatchReader {
-  constructor(public reader: DataLoader) {}
+export interface Reader {
+  loader: DataLoader,
+  matches: MatchData[],
+  formatData(): void
+}
+
+export class MatchReader implements Reader{
+  constructor(public loader: DataLoader) {}
   matches: MatchData[] = [];
 
-  formatData(){
-    this.reader.load();
-    this.matches = this.reader.data.map(
+  formatData(): void{
+    this.loader.load();
+    this.matches = this.loader.data.map(
       (row: string[]) => {
         return [
           stringToDate(row[0]),
