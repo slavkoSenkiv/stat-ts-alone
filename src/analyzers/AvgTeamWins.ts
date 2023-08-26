@@ -1,14 +1,14 @@
-import { Reader } from "../MatchReader";
+import { MatchData } from "../MatchData";
 import { MatchResult } from "../MatchResult";
 import { Analyzer } from "../Summary";
 
 export class AvgTeamWins implements Analyzer{
-  constructor(public team: string, public reader: Reader) {}
+  constructor(public team: string) {}
 
-  run(): number {
+  run(matches: MatchData[]): string {
     let teamScores: number = 0;
     let teamMatches: number = 0;
-    for (let match of this.reader.matches){
+    for (let match of matches){
       if (match[1] === this.team && match[5] === MatchResult.HomeWin){
         teamScores += match[3];
         teamMatches += 1;
@@ -17,7 +17,8 @@ export class AvgTeamWins implements Analyzer{
         teamMatches += 1;
       }
     }
-    return teamScores/teamMatches;
+    let avgScore = Math.floor(teamScores/teamMatches);
+    return `The Avg goal score for ${this.team} team is ${avgScore} scores per match`;
   }
 
 }

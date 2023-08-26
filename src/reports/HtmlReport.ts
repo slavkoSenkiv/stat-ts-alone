@@ -8,7 +8,7 @@ export class HtmlReport implements ReportFormat{
     let reportString: string = `
     <h1>Here is the report: </h1>
     <p>
-      that team won ${this.reportData} times </br>
+      ${this.reportData}</br>
       For more info subscribe <a href="https://www.google.com/">here</a>
     <p>
     `
