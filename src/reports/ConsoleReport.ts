@@ -1,7 +1,9 @@
-export class ConsoleReport {
-  constructor(public reportData: string) {}
+import { ReportFormat } from "../Summary";
 
-  run() {
+export class ConsoleReport implements ReportFormat {
+  constructor(public reportData: string | number) {}
+
+  run(): void {
     console.log(`Report says the team won ${this.reportData} times`);
   }
 }

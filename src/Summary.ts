@@ -1,21 +1,20 @@
 import { MatchReader, Reader } from "./MatchReader";
 
 export interface Analyzer {
-  output: string;
+  team: string;
   reader: Reader;
-  run(): void;
+  run(): number;
 }
+
 export interface ReportFormat {
+  reportData: string | number;
   run(): void;
 }
 
 export class Summary {
   constructor(
-    public team: string,
     public analyzer: Analyzer, 
-    public reportFormat: ReportFormat,
-    public reader: Reader
-  ) {}
+    public reportFormat: ReportFormat) {}
 
 
   runAndBuildReport(){
