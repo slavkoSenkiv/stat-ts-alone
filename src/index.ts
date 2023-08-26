@@ -15,6 +15,5 @@ reader.formatData()
 const analyzer = new AvgTeamWins('Man United');
 const reportFormat = new ConsoleReport();
 
-
 const summary = new Summary(analyzer, reportFormat);
 summary.runAndBuildReport(reader.matches);
